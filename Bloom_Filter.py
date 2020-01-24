@@ -57,5 +57,6 @@ class chromosome():
         return k_mers
     
     
-def GenerateRandomKmers(int: )
+def GenerateRandomKmers(num_of_k_mers):
+    pass
     
