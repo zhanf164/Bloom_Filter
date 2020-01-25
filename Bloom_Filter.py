@@ -57,6 +57,20 @@ class chromosome():
         return k_mers
     
     
-def GenerateRandomKmers(num_of_k_mers):
-    pass
+def GenerateRandomKmers(k_mers, num_of_k_mers, length):
+    not_in_kmers = []
+    nucls = ["A", "C", "T", "G"]
+    while len(not_in_kmers) < num_of_k_mers:
+        new_kmer = ''
+        for k in list(np.random.choice(nucls, length)):
+            new_kmer += k
+        if new_kmer in k_mers:
+            break
+        else:
+            not_in_kmers.append(new_kmer)
+            print(len(not_in_kmers))
+    return not_in_kmers
+
+
+    
     
