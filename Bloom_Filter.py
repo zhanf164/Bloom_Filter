@@ -56,7 +56,8 @@ class chromosome():
             k_mers.append(sequence[i:i+k_length])
         return k_mers
     
-    
+#Need to generate random kmers that aren't in the chromosome so 
+#that I can actually test for false positives in the bloom filter later. 
 def GenerateRandomKmers(k_mers, num_of_k_mers, length):
     not_in_kmers = []
     nucls = ["A", "C", "T", "G"]
@@ -68,9 +69,35 @@ def GenerateRandomKmers(k_mers, num_of_k_mers, length):
             break
         else:
             not_in_kmers.append(new_kmer)
-            print(len(not_in_kmers))
     return not_in_kmers
 
+
+##Just a quick check to see if things are adding up. I think this should work 
+#pretty well
+def Check_If_Bloom_Works(k_mers, not_in_kmers, bloomfilter):
+    np.random.shuffle(k_mers)
+    np.random.shuffle(not_in_kmers)
+    test_mers = k_mers[:1000] + not_in_kmers[:75]
+    np.random.shuffle(test_mers)
+    false_pos = 0
+    true_pos = 0
+    true_false = 0
+    for i in test_mers:
+        ret_var = bloomfilter.check(i)
+        if ret_var == True and i in not_in_kmers:
+            false_pos += 1
+        elif ret_var == False and i in not_in_kmers:
+            true_false += 1
+        elif ret_var == True and i in k_mers:
+            true_pos += 1
+    print("True positives were: {}".format(true_pos))
+    print("True Falses were: {}".format(true_false))
+    print("False_positives were: {}".format(false_pos))
+            
+
+
+    
+    
 
     
     
