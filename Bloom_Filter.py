@@ -72,8 +72,7 @@ def GenerateRandomKmers(k_mers, num_of_k_mers, length):
     return not_in_kmers
 
 
-##Just a quick check to see if things are adding up. I think this should work 
-#pretty well
+##Just a quick check to see if things are adding up.
 def Check_If_Bloom_Works(k_mers, not_in_kmers, bloomfilter):
     np.random.shuffle(k_mers)
     np.random.shuffle(not_in_kmers)
